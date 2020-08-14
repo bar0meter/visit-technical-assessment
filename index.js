@@ -1,10 +1,14 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 
-const router = require('./routes')
+const users = require('./routes/users')
+const fileUpload = require('./routes/file_upload')
 const PORT = 3000
 
-router(app)
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use('/users', users)
+app.use('/file_upload', fileUpload)
 
 app.listen(PORT, (err) => {
   console.log('Server running on PORT : ', PORT)
