@@ -1,8 +1,21 @@
-class User {
-  constructor(id, name) {
-    this.id = id
-    this.name = name
-  }
-}
+const Sequelize = require('sequelize')
+const DB = require('../db')
 
-export default User
+const Users = DB.define(
+  'users',
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: Sequelize.STRING,
+    },
+  },
+  {
+    timestamps: false,
+  }
+)
+
+module.exports = Users

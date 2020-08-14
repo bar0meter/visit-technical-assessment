@@ -7,6 +7,4 @@ const sequelize = new Sequelize('visitTest', 'root', 'qwerty@1234', {
 })
 
 // export DB
-module.exports = {
-  DB: sequelize,
-}
+module.exports = sequelize
