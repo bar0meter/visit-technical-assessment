@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, fileFilter })
 
-router.post('/', upload.single('userSteps'), function (req, res, next) {
+router.post('/', upload.single('userSteps'), function (req, res) {
   const file = req.file
   if (!!file) {
     res.send('thank you for uploading')
