@@ -4,6 +4,7 @@ const router = express.Router()
 
 const UserSteps = require('../models/user-steps')
 
+// allowing only csv files
 const fileFilter = function (req, file, cb) {
   if (file.mimetype === 'text/csv') {
     cb(null, true)
