@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     res.send(data)
   } catch (err) {
     console.log(err.message)
-    res.send([])
+    res.sendStatus(500) // server error
   }
 })
 
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     res.send(data)
   } catch (err) {
     console.log(err.message)
-    res.send([])
+    res.statusCode(500) // server error
   }
 })
 
@@ -56,7 +56,7 @@ router.get('/:id/steps', async (req, res) => {
     res.send(result)
   } catch (err) {
     console.log(err.message)
-    res.send([])
+    res.sendStatus(500) // server error
   }
 })
 
@@ -89,7 +89,7 @@ router.get('/:id/steps/:ymd', async (req, res) => {
     res.send(result)
   } catch (err) {
     console.log(err.message)
-    res.send([])
+    res.send(500) // server error
   }
 })
 

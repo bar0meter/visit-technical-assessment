@@ -24,22 +24,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, fileFilter })
 
-router.get('/', async (req, res) => {
-  try {
-    const data = await UserSteps.findAll()
-    res.send(data)
-  } catch (err) {
-    console.log(err.message)
-    res.send([])
-  }
-})
-
 router.post('/', upload.single('userSteps'), function (req, res) {
   const file = req.file
   if (!!file) {
     res.send('thank you for uploading')
   } else {
-    res.send('error in uploading file. Check file format')
+    res.sendStatus(400) // bad request
   }
 })
 
