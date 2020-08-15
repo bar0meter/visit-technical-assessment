@@ -3,6 +3,7 @@ const multer = require('multer')
 const router = express.Router()
 
 const UserSteps = require('../models/user-steps')
+const { sendStatusCodeWithMessage } = require('./utils')
 
 // allowing only csv files
 const fileFilter = function (req, file, cb) {
@@ -29,7 +30,11 @@ router.post('/', upload.single('userSteps'), function (req, res) {
   if (!!file) {
     res.send('thank you for uploading')
   } else {
-    res.sendStatus(400) // bad request
+    sendStatusCodeWithMessage(
+      400,
+      'Bad request, only csv file types allowed',
+      res
+    )
   }
 })
 

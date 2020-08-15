@@ -6,13 +6,15 @@ const Users = require('../models/user')
 const DB = require('../db')
 const UserSteps = require('../models/user-steps')
 
+const { sendStatusCodeWithMessage } = require('./utils')
+
 router.get('/', async (req, res) => {
   try {
     const data = await Users.findAll()
     res.send(data)
   } catch (err) {
     console.log(err.message)
-    res.sendStatus(500) // server error
+    sendStatusCodeWithMessage(500, `Server error: ${err.message}`, res)
   }
 })
 
@@ -22,8 +24,7 @@ router.get('/:id', async (req, res) => {
     const data = await Users.findByPk(userId)
     res.send(data)
   } catch (err) {
-    console.log(err.message)
-    res.statusCode(500) // server error
+    sendStatusCodeWithMessage(500, `Server error: ${err.message}`, res)
   }
 })
 
@@ -34,7 +35,11 @@ router.get('/:id/steps', async (req, res) => {
   try {
     const user = await Users.findByPk(userId)
     if (!user) {
-      res.sendStatus(404) // user with given id not found
+      sendStatusCodeWithMessage(
+        404,
+        `User with given id: ${userId} not found`,
+        res
+      )
       return
     }
 
@@ -55,8 +60,7 @@ router.get('/:id/steps', async (req, res) => {
 
     res.send(result)
   } catch (err) {
-    console.log(err.message)
-    res.sendStatus(500) // server error
+    sendStatusCodeWithMessage(500, `Server error: ${err.message}`, res)
   }
 })
 
@@ -67,7 +71,11 @@ router.get('/:id/steps/:ymd', async (req, res) => {
   try {
     const user = await Users.findByPk(userId)
     if (!user) {
-      res.sendStatus(404) // user with given id not found
+      sendStatusCodeWithMessage(
+        404,
+        `User with given id: ${userId} not found`,
+        res
+      )
       return
     }
 
@@ -88,8 +96,7 @@ router.get('/:id/steps/:ymd', async (req, res) => {
 
     res.send(result)
   } catch (err) {
-    console.log(err.message)
-    res.send(500) // server error
+    sendStatusCodeWithMessage(500, `Server error: ${err.message}`, res)
   }
 })
 

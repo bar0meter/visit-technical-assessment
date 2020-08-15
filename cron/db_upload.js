@@ -54,10 +54,21 @@ const DBUpload = new CronJob('1 * * * *', async function () {
 const insertUserStepsEntry = async (data) => {
   const userId = data[0]
   const name = data[1]
-  const stepsDate = new Date(parseInt(data[2], 10))
+  let stepsDate = new Date(parseInt(data[2], 10))
+
+  let steps = data[3]
+  let calories = data[4]
+
+  if (!userId || !name || name === 'NULL') {
+    // csv files had NULL values (considering NULL => null)
+    return // userId or name is not present then dont save to db
+  }
+
+  stepsDate = !stepsDate ? new Date(parseInt(data[2], 10)) : stepsDate
   const date = moment(stepsDate).format('YYYY-MM-DD H:mm:ss')
-  const steps = data[3]
-  const calories = data[4]
+
+  steps = !steps ? 0 : steps
+  calories = !calories ? 0 : calories
 
   try {
     // Start transaction
