@@ -15,6 +15,12 @@ const Users = DB.define(
   },
   {
     timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ['name'],
+      },
+    ],
   }
 )
 

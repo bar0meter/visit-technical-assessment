@@ -42,6 +42,7 @@ router.get('/:id/steps', async (req, res) => {
       where: {
         userId: user.id,
       },
+      order: [['date', 'DESC']],
     })
 
     const result = {}

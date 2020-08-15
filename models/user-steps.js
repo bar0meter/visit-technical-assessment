@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const DB = require('../db')
+const Users = require('./user')
 
 const UserSteps = DB.define(
   'userSteps',
@@ -12,6 +13,10 @@ const UserSteps = DB.define(
     userId: {
       type: Sequelize.INTEGER,
       foreignKey: true,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
     },
     steps: {
       type: Sequelize.INTEGER,
@@ -26,6 +31,11 @@ const UserSteps = DB.define(
   },
   {
     timestamps: false,
+    indexes: [
+      {
+        fields: ['userId', 'date'],
+      },
+    ],
   }
 )
 

@@ -36,6 +36,8 @@ const task = async () => {
           for (const data of csvData) {
             console.log(`Saving entry: ${data}`)
             await insertUserStepsEntry(data)
+
+            // for now  not deleting file once upload done. (we can also delete file when parsing and saving is done for the file)
           }
         })
     })
